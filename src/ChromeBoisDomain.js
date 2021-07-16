@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'; //eslint-disable-next-line
 import { drawChromeBoiAtCoords, toggleCycling, resize } from './canvasHelpers.js'
 
 
@@ -10,6 +10,25 @@ export default class ChromeBoisDomain extends Component {
      * function that has been provided and is already imported
      * (`drawChromeBoiAtCoords` expects two arguments, an x and a y coordinate)
      */
+
+    const x = event.clientX
+    const y = event.clientY
+
+    drawChromeBoiAtCoords(x, y)
+  }
+
+  handleClick = (event) => {
+    toggleCycling()
+  }
+
+  handleKeyPress = (event) => {
+    const key = event.key
+
+    if (key === "a") {
+      resize('+') 
+    } else if (key === "s") {
+      resize('-')
+    }
   }
   
   /* TODO: Create an event handler which, when fired, invokes the provided
@@ -30,7 +49,10 @@ export default class ChromeBoisDomain extends Component {
         onMouseMove={this.handleMouseMove}
         width='900'
         height='600'
-        tabIndex="0">
+        tabIndex="0"
+        onClick={this.handleClick}
+        onKeyPress={this.handleKeyPress}>
+    
       </canvas>
     )
   }
